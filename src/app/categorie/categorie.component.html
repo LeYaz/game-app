@@ -1,0 +1,5 @@
+<div class="container">
+    <div *ngFor="let c of categories" class=" mx-auto text-center div-btn-cat">          
+        <button class="btn-cat" (click)="choixCategorie(c)">{{ c.nom }}</button>  
+    </div>
+</div>

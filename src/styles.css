@@ -1,1 +1,178 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+
+html body{
+    margin: 0;
+    padding: 0;
+    font-family: Acme;
+    /* color: #fa983a; */
+    color: white;
+}
+
+body{
+    background-color: #1e3799!important;
+    overflow-x: hidden;
+}
+
+
+@keyframes translatedroit {
+    from  {transform: translateX(-100%);}
+    50%  {transform: translateX(-10%)}
+    90% {transform: translateX(5%)}
+    to {transform: translateX(0)}
+  }
+
+  @keyframes translategauche {
+    from  {transform: translateX(100%);}
+    50%  {transform: translateX(10%)}
+    to {transform: translateX(0)}
+    90% {transform: translateX(-5%)}
+  }
+
+.btn-cat{
+    width: 200px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    /* background-color: #82ccdd; */
+    /* border: 1px solid #079992; */
+    /* border: 2px solid #e55039;
+    color: #e55039; */
+    background-color: #0c2461;
+    color: white;
+    border: 2px solid white;
+}
+
+.btn-cat:hover:enabled{
+    /* background-color: #78e08f;  */
+    /* background-color: #e55039;
+    color:#82ccdd;
+    transition: 0.5s;   */
+    background-color: white;
+    color: #0c2461;
+    border: 2px solid #0c2461;
+   }
+
+.btn-next{
+    background-image: -webkit-linear-gradient(45deg, white 50%, transparent 50%);
+  background-image: linear-gradient(45deg, white 50%, transparent 50%);
+  background-position: 100%;
+  background-size: 400%;
+  -webkit-transition: background 1s ease-in-out;
+  transition: background 1s ease-in-out;
+}
+
+.btn-next:hover:enabled{
+    background-position: 0;
+    transform: scale(1.2);
+}
+
+.btn-vert{
+    border: 2px solid green;
+    animation-name: borderstyle;
+    animation-duration: 0.5s;
+    animation-iteration-count: 2;
+}
+.btn-vert:hover{
+    border: 2px solid green;
+}
+
+.btn-rouge{
+    border: 2px solid red;
+    animation-name: borderstyle;
+    animation-duration: 0.5s;
+    animation-iteration-count: 2;
+}
+.btn-rouge:hover{
+    border: 2px solid red;
+}
+
+@keyframes borderstyle{
+    0% {
+        opacity: 1;
+    }
+    25% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    75% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+.div-btn-cat:nth-child(odd){
+    animation-name: translatedroit;
+    animation-duration: 5s;
+    
+}
+
+
+
+.div-btn-cat:nth-child(even){
+    animation-name: translategauche;
+    animation-duration: 5s; 
+}
+
+@keyframes type{ 
+    0% { 
+        opacity: 0;
+        }
+     100% {
+         opacity: 1;
+     }    
+     }
+
+/* .typing-text:nth-child(){  
+    animation: type 5s; 
+} */
+
+@keyframes slidein {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+
+.typing-text{
+    animation:slidein 2s;
+    margin: 10px;
+    transform: scaleX(0);
+    animation-fill-mode: forwards;
+}
+
+.div-typing-text:nth-child(2) .btn-cat .typing-text{
+    animation-delay: 1s;
+}
+
+.div-typing-text:nth-child(3) .btn-cat .typing-text{
+    animation-delay: 2s;
+}
+
+.div-typing-text:nth-child(4) .btn-cat .typing-text{
+    animation-delay: 3s;
+}
+
+
+footer{
+   width:100%;
+   height:60px;  
+   background:#0c2461;
+   color: white;
+   margin-top: 10px;
+}
+
+.content {
+    min-height: calc(100vh - 70px);
+    
+}
+
+.footer {
+    height: 60px;
+}
+
+
+

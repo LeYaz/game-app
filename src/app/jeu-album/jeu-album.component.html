@@ -1,0 +1,27 @@
+<div class="container">
+    
+    <div class="container">
+        <h2 class="text-center mb-5">{{j.question}}</h2>
+        <div class="row mb-5">
+            <div class="col-4 mx-auto text-center">
+                <img src="{{j.image}}">
+            </div>
+        </div>
+        <div class="container">
+            <div class="row w-50 mx-auto">
+                <div *ngFor="let o of j.option; let i = index" class=" mx-auto text-center div-typing-text"> 
+                <button [disabled]="showreponse" [ngClass]="{'btn-vert' : bonnereponse && stateOfButton[i] , 'btn-rouge' : !bonnereponse && stateOfButton[i] }"  (click)="clickReponse(o, j.valide); changeState(i)" class="btn-cat"><p class="typing-text">{{ o }}</p></button>
+            </div>
+        </div>
+            <div class="row w-50 mx-auto">
+            <div *ngIf="showreponse" class="mx-auto text-center">
+                <p *ngIf="bonnereponse">✔️ C'est la bonne réponse</p>
+                <p *ngIf="!bonnereponse">❌ C'est une mauvaise réponse, la bonne réponse est : {{ j.valide }}</p>
+                <button class="btn-cat btn-next" *ngIf="!finjeu" [disabled]="finjeu" (click)="clickSuivant()">Question suivante ➜</button>
+            </div>
+        </div>
+        
+        </div>
+    </div>
+        <app-resultat (recommencerEvent)="recommencer($event)" point="{{point}}" total="{{totalquestion}}" *ngIf="finjeu"></app-resultat>
+</div>
