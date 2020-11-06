@@ -18,6 +18,7 @@ export class JeuAlbumComponent implements OnInit {
   finjeu:boolean= false;
   questionnumber:number = 0;
   totalquestion:number;
+  
   point:number=0;
   stateOfButton: boolean[];
 

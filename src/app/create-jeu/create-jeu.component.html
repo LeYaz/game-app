@@ -1,0 +1,23 @@
+<form [formGroup]="jeuForm" (ngSubmit)="submit()">
+ 
+    <p>
+     
+      <select formControlName="categorie" (change)="changeCategorie($event)">
+        <option [ngValue]="null" disabled>Select categorie</option>
+        <option *ngFor="let c of categories" value="{{c.id}}" [ngValue]="c.id">{{c.nom}}</option>
+        <option [ngValue]="0" > Autre </option>
+      </select>
+      <input *ngIf="actualcatid == 0" placeholder="Nom de votre categorie" >
+    </p>
+
+    <p>
+     
+        <select formControlName="souscategorie">
+          <option [ngValue]="null" disabled>Select categorie</option>
+          <option *ngFor="let s of sousCategories" [ngValue]="s.id">{{s.nom}}</option>
+        </select>
+       
+        <button type="submit">Submit</button>
+      </p>
+     
+    </form>

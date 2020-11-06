@@ -18,7 +18,7 @@ export class SouscategorieComponent implements OnInit {
   ngOnInit(): void {
     let liste;
     let catid = parseInt(this.route.snapshot.paramMap.get('id'));
-    this.sousCategorieService.getSousCategorie(catid).subscribe(scat =>{
+    this.sousCategorieService.getSousCategoriebyCategorie(catid).subscribe(scat =>{
       liste = scat;
       liste.forEach(e => {
         const id = e.id;

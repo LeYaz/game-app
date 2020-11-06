@@ -12,7 +12,11 @@ export class SouscategorieService {
 
   constructor(private http:HttpClient) { }
 
-  getSousCategorie(catid:number){
+  getSousCategoriebyCategorie(catid:number){
     return this.http.get(this.url+'souscategories?categorie.id='+catid);
+  }
+
+  getSousCategorie(){
+    return this.http.get(this.url+'souscategories');
   }
 }

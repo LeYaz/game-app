@@ -3,8 +3,8 @@
     <div class="container">
         <h2 class="text-center mb-5">{{j.question}}</h2>
         <div class="row mb-5">
-            <div class="col-4 mx-auto text-center">
-                <img src="{{j.image}}">
+            <div class="mx-auto text-center div-img">
+                <img class="img" [ngClass]="{'img-anim' :!showreponse}" src="{{j.image}}">
             </div>
         </div>
         <div class="container">

@@ -17,17 +17,17 @@ body{
 
 
 @keyframes translatedroit {
-    from  {transform: translateX(-100%);}
+    0%  {transform: translateX(-100%);}
     50%  {transform: translateX(-10%)}
     90% {transform: translateX(5%)}
-    to {transform: translateX(0)}
+    100% {transform: translateX(0)}
   }
 
   @keyframes translategauche {
-    from  {transform: translateX(100%);}
+    0%  {transform: translateX(100%);}
     50%  {transform: translateX(10%)}
-    to {transform: translateX(0)}
     90% {transform: translateX(-5%)}
+    100% {transform: translateX(0)}
   }
 
 .btn-cat{
@@ -104,19 +104,40 @@ body{
         opacity: 1;
     }
 }
-
-
-.div-btn-cat:nth-child(odd){
-    animation-name: translatedroit;
-    animation-duration: 5s;
-    
+.div-img{
+    min-height:156px ;
+}
+.img-anim{
+    animation: img-apparition-bis 3s linear ;
+    border-radius: 5%;
+}
+.img{
+    border-radius: 5%;
 }
 
+@keyframes img-apparition {
+    0%{
+        opacity: 0;
+        transform: rotate(1800deg);
+        width: 15px;
+        height: 15px;
+        border-radius: 100%;
+    }
+    100%{
+        opacity:1;
+        transform: rotate(0deg);
+        width: 156px;
+        height: 156px;
+        border-radius: 5%;
+    }
+}
 
+.div-btn-cat:nth-child(odd){
+    animation: translatedroit 5s linear; 
+}
 
 .div-btn-cat:nth-child(even){
-    animation-name: translategauche;
-    animation-duration: 5s; 
+    animation: translategauche 5s linear;    
 }
 
 @keyframes type{ 
@@ -127,10 +148,6 @@ body{
          opacity: 1;
      }    
      }
-
-/* .typing-text:nth-child(){  
-    animation: type 5s; 
-} */
 
 @keyframes slidein {
     from { transform: scaleX(0); }

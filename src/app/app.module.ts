@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule,FormsModule  } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,6 +11,10 @@ import { SouscategorieComponent } from './souscategorie/souscategorie.component'
 import { ResultatComponent } from './resultat/resultat.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { CreateJeuComponent } from './create-jeu/create-jeu.component';
+import { TypeJeuComponent } from './type-jeu/type-jeu.component';
+import { CreateJeuQuatreChoixComponent } from './create-jeu/create-jeu-quatre-choix/create-jeu-quatre-choix.component';
+import { CreateJeuQuatreImgComponent } from './create-jeu/create-jeu-quatre-img/create-jeu-quatre-img.component';
 
 
 @NgModule({
@@ -20,12 +25,18 @@ import { FooterComponent } from './footer/footer.component';
     SouscategorieComponent,
     ResultatComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    CreateJeuComponent,
+    TypeJeuComponent,
+    CreateJeuQuatreChoixComponent,
+    CreateJeuQuatreImgComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

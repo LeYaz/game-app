@@ -16,7 +16,4 @@ export class CategorieService {
     return this.http.get(this.url+'categories');
   }
 
-  getSousCategorie(cat:Categorie){
-    return this.http.get(this.url+'souscategories?categorie.id='+cat.id);
-  }
 }
