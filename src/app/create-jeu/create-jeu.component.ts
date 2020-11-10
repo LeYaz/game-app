@@ -18,15 +18,19 @@ export class CreateJeuComponent implements OnInit {
 
   constructor(private fb:FormBuilder, private categorieService: CategorieService, private sousCategorieService: SouscategorieService, private typeJeuService: TypeJeuService) { }
 
-  jeuAlbum: JeuAlbum;
+  listJeuAlbum: JeuAlbum [] = new Array();
   categories: Categorie[] = new Array();
   sousCategories: SousCategorie[] = new Array();
   typeJeu: TypeJeu[] = new Array();
   actualcatid:number;
+  actualsouscatid:number;
+  showcreatejeu:number=0;
+  newscat:string;
   
 
   ngOnInit(): void {
     let catList;
+    let typelist;
     this.categorieService.getCategorie().subscribe(cat =>{
       catList = cat;
       catList.forEach(e => {
@@ -36,18 +40,38 @@ export class CreateJeuComponent implements OnInit {
         this.categories.push(categorie);
       })
     })
+
+    this.typeJeuService.getTypeJeu().subscribe(tj =>{
+      typelist = tj;
+      typelist.forEach(e =>{
+        const id = e.id;
+        const nom = e.nom;
+        const typejeu = new TypeJeu(id, nom);
+        this.typeJeu.push(typejeu);
+      })
+    })
     this.jeuForm = this.fb.group({
       categorie: [null],
-      souscategorie:[null]
+      souscategorie:[null],
+      typejeu:[null],
+      inputcat:[null],
+      inputsouscat:[null]
     });
   }
 
   submit() {
     console.log("Form Submitted")
     console.log(this.jeuForm.value)
-    console.log(this.sousCategories)
+    this.showcreatejeu = this.jeuForm.value.typejeu;
+    
   }
 
+
+  /**
+   * 
+   * @param e element selectionner
+   * Affiche les sous categorie suivant la categorie selectionner
+   */
   changeCategorie(e){
     console.log(e.target.value);
     let list;
@@ -68,11 +92,20 @@ export class CreateJeuComponent implements OnInit {
       })
       }else{
         // Creer une nouvelle categorie a partir du service
+
+        //Creer sous caatégorie a partir du service
+
       }
       
     }
     
     
+  }
+
+  changeSousCategorie(e){
+    let tab = e.target.value.split(' ');
+    let scatid = tab[1];
+    this.actualsouscatid = scatid;
   }
 
 }

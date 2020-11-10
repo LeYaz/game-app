@@ -1,3 +1,5 @@
+<div class="container">
+
 <form [formGroup]="jeuForm" (ngSubmit)="submit()">
  
     <p>
@@ -7,17 +9,34 @@
         <option *ngFor="let c of categories" value="{{c.id}}" [ngValue]="c.id">{{c.nom}}</option>
         <option [ngValue]="0" > Autre </option>
       </select>
-      <input *ngIf="actualcatid == 0" placeholder="Nom de votre categorie" >
+      <input formControlName="inputcat" *ngIf="actualcatid == 0" placeholder="Nom de votre categorie" >
     </p>
 
     <p>
      
-        <select formControlName="souscategorie">
+        <select formControlName="souscategorie" (change)="changeSousCategorie($event)">
           <option [ngValue]="null" disabled>Select categorie</option>
           <option *ngFor="let s of sousCategories" [ngValue]="s.id">{{s.nom}}</option>
+          <option [ngValue]="0" > Autre </option>
+        </select>
+        <input formControlName="inputsouscat" *ngIf="actualcatid == 0 || actualsouscatid == 0" placeholder="Nom de votre sous categorie"  >
+        
+      </p>
+
+      <p>
+     
+        <select formControlName="typejeu">
+          <option [ngValue]="null" disabled>Select type de jeu</option>
+          <option *ngFor="let j of typeJeu" [ngValue]="j.id">{{j.nom}}</option>
         </select>
        
-        <button type="submit">Submit</button>
+        
       </p>
-     
+      
+      <button type="submit">Créer une question</button>
     </form>
+    <p>
+      <app-create-jeu-quatre-choix *ngIf="showcreatejeu == 1"></app-create-jeu-quatre-choix>
+      <app-create-jeu-quatre-img *ngIf="showcreatejeu == 2"></app-create-jeu-quatre-img>
+    </p>
+  </div>
