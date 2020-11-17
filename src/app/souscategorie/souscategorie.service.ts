@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { SousCategorie } from './soucategorie-model';
-
+import { environment } from '../../environments/environment'
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SouscategorieService {
 
-  private url:string = 'http://localhost:1337/';
+  private url:string = environment.baseUrl;
 
   constructor(private http:HttpClient) { }
 
@@ -18,5 +19,9 @@ export class SouscategorieService {
 
   getSousCategorie(){
     return this.http.get(this.url+'souscategories');
+  }
+
+  addSousCagetoire(souscategorie:SousCategorie):Observable<SousCategorie>{
+    return this.http.post<SousCategorie>(this.url+'souscategories', souscategorie);
   }
 }

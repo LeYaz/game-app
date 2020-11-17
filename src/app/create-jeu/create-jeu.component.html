@@ -1,42 +1,50 @@
 <div class="container">
 
-<form [formGroup]="jeuForm" (ngSubmit)="submit()">
- 
-    <p>
-     
-      <select formControlName="categorie" (change)="changeCategorie($event)">
-        <option [ngValue]="null" disabled>Select categorie</option>
-        <option *ngFor="let c of categories" value="{{c.id}}" [ngValue]="c.id">{{c.nom}}</option>
-        <option [ngValue]="0" > Autre </option>
-      </select>
-      <input formControlName="inputcat" *ngIf="actualcatid == 0" placeholder="Nom de votre categorie" >
-    </p>
-
-    <p>
-     
-        <select formControlName="souscategorie" (change)="changeSousCategorie($event)">
-          <option [ngValue]="null" disabled>Select categorie</option>
-          <option *ngFor="let s of sousCategories" [ngValue]="s.id">{{s.nom}}</option>
-          <option [ngValue]="0" > Autre </option>
-        </select>
-        <input formControlName="inputsouscat" *ngIf="actualcatid == 0 || actualsouscatid == 0" placeholder="Nom de votre sous categorie"  >
-        
-      </p>
-
-      <p>
-     
+<form [formGroup]="jeuForm" (ngSubmit)="submit()" *ngIf="!showcreatejeu">
+    <div class="row">
+      <div class="col">
+        <div class="row d-flex justify-content-center">
+          <select formControlName="categorie" (change)="changeCategorie($event)">
+            <option [ngValue]="null" disabled>Select categorie</option>
+            <option *ngFor="let c of categories" value="{{c.id}}" [ngValue]="c.id">{{c.nom}}</option>
+            <option [ngValue]="0" > Autre </option>
+          </select>  
+        </div>
+        <div class="row mt-2 d-flex justify-content-center">
+          <input formControlName="inputcat" *ngIf="actualcatid == 0" placeholder="Nom de votre categorie" >
+        </div>
+      </div>
+      <div class="col">
+        <div class="row d-flex justify-content-center">
+          <select formControlName="souscategorie" (change)="changeSousCategorie($event)">
+            <option [ngValue]="null" disabled>Select categorie</option>
+            <option *ngFor="let s of sousCategories" [ngValue]="s.id">{{s.nom}}</option>
+            <option [ngValue]="0" > Autre </option>
+          </select>
+        </div>
+        <div class="row mt-2 d-flex justify-content-center">
+          <input formControlName="inputsouscat" *ngIf="actualcatid == 0 || actualsouscatid == 0" placeholder="Nom de votre sous categorie"  >
+        </div>
+      </div>
+      <div class="col">
+        <div class="row  d-flex justify-content-center">
         <select formControlName="typejeu">
           <option [ngValue]="null" disabled>Select type de jeu</option>
           <option *ngFor="let j of typeJeu" [ngValue]="j.id">{{j.nom}}</option>
         </select>
-       
-        
-      </p>
-      
-      <button type="submit">Créer une question</button>
+      </div>
+      </div>      
+    </div>
+    <div class="row mx-auto">
+        <div class="col d-flex justify-content-center mt-5">
+          <button type="submit" [disabled]="!jeuForm.valid">Créer une question</button>
+        </div>
+    </div>
     </form>
+    <app-create-jeu-resume-cat *ngIf="showcreatejeu" [categorie]="categorieSelected" [sousCategorie]="sousCategorieSelected"[typeJeu]="typeJeuSelected"></app-create-jeu-resume-cat>
+    <div class="ligne"></div>
     <p>
-      <app-create-jeu-quatre-choix *ngIf="showcreatejeu == 1"></app-create-jeu-quatre-choix>
+      <app-create-jeu-quatre-choix (jeuAlbumEvent)="ajouterJeuAlbum($event)" *ngIf="showcreatejeu == 1" ></app-create-jeu-quatre-choix>
       <app-create-jeu-quatre-img *ngIf="showcreatejeu == 2"></app-create-jeu-quatre-img>
     </p>
   </div>

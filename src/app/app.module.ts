@@ -15,6 +15,7 @@ import { CreateJeuComponent } from './create-jeu/create-jeu.component';
 import { TypeJeuComponent } from './type-jeu/type-jeu.component';
 import { CreateJeuQuatreChoixComponent } from './create-jeu/create-jeu-quatre-choix/create-jeu-quatre-choix.component';
 import { CreateJeuQuatreImgComponent } from './create-jeu/create-jeu-quatre-img/create-jeu-quatre-img.component';
+import { CreateJeuResumeCatComponent } from './create-jeu/create-jeu-resume-cat/create-jeu-resume-cat.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { CreateJeuQuatreImgComponent } from './create-jeu/create-jeu-quatre-img/
     CreateJeuComponent,
     TypeJeuComponent,
     CreateJeuQuatreChoixComponent,
-    CreateJeuQuatreImgComponent
+    CreateJeuQuatreImgComponent,
+    CreateJeuResumeCatComponent
   ],
   imports: [
     BrowserModule,

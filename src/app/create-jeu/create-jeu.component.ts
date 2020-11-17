@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Categorie } from '../categorie/categorie-model';
 import { CategorieService } from '../categorie/categorie.service';
 import { JeuAlbum } from '../jeu-album/jeu-album-model';
@@ -26,6 +26,10 @@ export class CreateJeuComponent implements OnInit {
   actualsouscatid:number;
   showcreatejeu:number=0;
   newscat:string;
+  categorieSelected:Categorie=new Categorie(0,"categorie");
+  sousCategorieSelected:SousCategorie=new SousCategorie(0,"souscategorie",0);
+  typeJeuSelected: TypeJeu=new TypeJeu(0,"type de jeu");
+
   
 
   ngOnInit(): void {
@@ -51,9 +55,9 @@ export class CreateJeuComponent implements OnInit {
       })
     })
     this.jeuForm = this.fb.group({
-      categorie: [null],
-      souscategorie:[null],
-      typejeu:[null],
+      categorie: [null,Validators.required],
+      souscategorie:[null, Validators.required],
+      typejeu:[null, Validators.required],
       inputcat:[null],
       inputsouscat:[null]
     });
@@ -61,9 +65,30 @@ export class CreateJeuComponent implements OnInit {
 
   submit() {
     console.log("Form Submitted")
-    console.log(this.jeuForm.value)
+    console.log(this.jeuForm.value.categorie)
     this.showcreatejeu = this.jeuForm.value.typejeu;
+
+    if(this.jeuForm.value.categorie!=0){
+      this.categorieSelected=this.categories[this.jeuForm.value.categorie-1];
+    }else{
+      this.categorieSelected = new Categorie(0,this.jeuForm.value.inputcat);
+      //Créer la catégorie 
+      //Requete Post
+      this.categorieService.addCategorie(this.categorieSelected).subscribe(res=>{
+        this.categorieSelected.id = res.id;
+      })
+    }
+
+    if(this.jeuForm.value.souscategorie!=0){
+      this.sousCategorieSelected=this.sousCategories[this.jeuForm.value.souscategorie-1];
+    }else{
+      this.sousCategorieSelected = new SousCategorie(0,this.jeuForm.value.inputsouscat,this.categorieSelected.id);
+      this.sousCategorieService.addSousCagetoire(this.sousCategorieSelected).subscribe(res =>{
+        this.sousCategorieSelected.id = res.id;
+      })
+    }
     
+    this.typeJeuSelected = this.typeJeu[this.jeuForm.value.typejeu-1];
   }
 
 
@@ -90,7 +115,18 @@ export class CreateJeuComponent implements OnInit {
           this.sousCategories.push(souscat);
         })
       })
+      this.jeuForm.get('inputcat').clearValidators();
+      this.jeuForm.get('inputcat').updateValueAndValidity();
+      if(this.actualsouscatid!=0){
+        this.jeuForm.get('inputsouscat').clearValidators();
+        this.jeuForm.get('inputsouscat').updateValueAndValidity();
+      }
       }else{
+        this.jeuForm.get('inputcat').setValidators([Validators.required]);
+        this.jeuForm.get('inputsouscat').setValidators([Validators.required]);
+        this.jeuForm.get('inputcat').updateValueAndValidity();
+        this.jeuForm.get('inputsouscat').updateValueAndValidity();
+
         // Creer une nouvelle categorie a partir du service
 
         //Creer sous caatégorie a partir du service
@@ -106,6 +142,25 @@ export class CreateJeuComponent implements OnInit {
     let tab = e.target.value.split(' ');
     let scatid = tab[1];
     this.actualsouscatid = scatid;
+    if(this.actualsouscatid == 0 ){
+      this.jeuForm.get('inputsouscat').setValidators([Validators.required]);
+      this.jeuForm.get('inputsouscat').updateValueAndValidity();
+    }else{
+      this.jeuForm.get('inputsouscat').clearValidators();
+      this.jeuForm.get('inputsouscat').updateValueAndValidity();
+    }
   }
+
+  ajouterJeuAlbum(ja:JeuAlbum){
+    this.listJeuAlbum.push(ja);
+    console.log('composant parent : '+ ja.valide)
+  }
+
+  /**
+   * Ajouter le post du jeu complet : 
+   *  -post des cat et sous cat si nouvelle,
+   *  -post des question
+   *  
+   */
 
 }

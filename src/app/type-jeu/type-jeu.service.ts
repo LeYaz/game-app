@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TypeJeuService {
 
-  private url:string = 'http://localhost:1337/';
+  private url:string = environment.baseUrl;
 
   constructor(private http:HttpClient) { }
 

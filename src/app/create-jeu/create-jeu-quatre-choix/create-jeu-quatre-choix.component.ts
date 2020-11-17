@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { JeuAlbum } from 'src/app/jeu-album/jeu-album-model';
 import { JeuAlbumService } from 'src/app/jeu-album/jeu-album.service';
 
@@ -15,19 +15,19 @@ export class CreateJeuQuatreChoixComponent implements OnInit {
   questionForm:FormGroup;
   @Output() jeuAlbumEvent = new EventEmitter<JeuAlbum>();
   imgurl="...";
-
+  imagejeu:File = null;
   constructor(private fb:FormBuilder, private http:HttpClient) { }
 
   ngOnInit(): void {
     this.questionForm = this.fb.group({
-      question: [null],
-      choix1:[null],
-      choix2:[null],
-      choix3:[null],
-      choix4:[null],
-      valide:[null],
-      image:this.fb,
-      choix : this.fb.array([null,null,null,null])
+      question: [null, Validators.required],
+      choix1:[null, Validators.required],
+      choix2:[null, Validators.required],
+      choix3:[null, Validators.required],
+      choix4:[null, Validators.required],
+      valide:[null, Validators.required],
+      image:[null, Validators.required],
+      choix : this.fb.array([null,null,null,null], Validators.required)
 
     })
   }
@@ -37,7 +37,7 @@ export class CreateJeuQuatreChoixComponent implements OnInit {
   }
 
   submitQuestion(){
-    console.log(this.questionForm.value);
+    // console.log(this.questionForm.value);
   }
 
   get choix(){
@@ -58,7 +58,7 @@ export class CreateJeuQuatreChoixComponent implements OnInit {
     //     this.questionForm.get('image').setValue(file);
     //   }
     // }
-
+    
     if(event.target.files){
       var reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
@@ -66,10 +66,27 @@ export class CreateJeuQuatreChoixComponent implements OnInit {
       reader.onload = (e:any)=>{
         this.imgurl = e.target.result;
       }
+
+      this.imagejeu = <File> event.target.files[0];
     }
   }
 
   onUploadImage(){
-    this.http.post()
+    console.log("click upload")
+    const fd = new FormData();
+    fd.append('files', this.imagejeu);
+    console.log(fd);
+    this.http.post('http://localhost:1337/upload', fd).subscribe(res => {
+      console.log(res);
+    })
+  }
+
+  sendQuestion(){
+    this.jeuAlbum.question = this.questionForm.value.question;
+    this.jeuAlbum.option = this.questionForm.value.choix;
+    this.jeuAlbum.valide = this.questionForm.value.valide;
+    console.log("jeu envoyé : "+this.jeuAlbum);
+    // Ajouter l'upload de l'image et bind l'url dans jeuAlbum.image
+    this.jeuAlbumEvent.emit(this.jeuAlbum);
   }
 }
