@@ -16,6 +16,11 @@ import { TypeJeuComponent } from './type-jeu/type-jeu.component';
 import { CreateJeuQuatreChoixComponent } from './create-jeu/create-jeu-quatre-choix/create-jeu-quatre-choix.component';
 import { CreateJeuQuatreImgComponent } from './create-jeu/create-jeu-quatre-img/create-jeu-quatre-img.component';
 import { CreateJeuResumeCatComponent } from './create-jeu/create-jeu-resume-cat/create-jeu-resume-cat.component';
+import { CompteComponent } from './compte/compte.component';
+import { CreerCompteComponent } from './compte/creer-compte/creer-compte.component';
+import { ConnectionCompteComponent } from './compte/connection-compte/connection-compte.component';
+import { ProfilComponent } from './compte/profil/profil.component';
+import { ForgetPasswordComponent } from './compte/forget-password/forget-password.component';
 
 
 @NgModule({
@@ -31,7 +36,12 @@ import { CreateJeuResumeCatComponent } from './create-jeu/create-jeu-resume-cat/
     TypeJeuComponent,
     CreateJeuQuatreChoixComponent,
     CreateJeuQuatreImgComponent,
-    CreateJeuResumeCatComponent
+    CreateJeuResumeCatComponent,
+    CompteComponent,
+    CreerCompteComponent,
+    ConnectionCompteComponent,
+    ProfilComponent,
+    ForgetPasswordComponent
   ],
   imports: [
     BrowserModule,

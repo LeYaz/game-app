@@ -1,0 +1,17 @@
+
+
+<div class="container" *ngIf="!showProfil">
+    <div *ngIf="possedecompte">
+        <app-connection-compte (connected)="show($event)"></app-connection-compte>
+        <p >Pas de compte ? <button (click)="creerCompte();">Créer un compte</button></p>
+    </div>
+    <div *ngIf="!possedecompte">
+        <app-creer-compte ></app-creer-compte>
+        <p>Déjà un compte ? <button (click)="creerCompte();">Se connecter</button></p>
+    </div>
+</div>
+<div class="container" *ngIf="showProfil">
+    <div>
+        <app-profil></app-profil>
+    </div>
+</div>

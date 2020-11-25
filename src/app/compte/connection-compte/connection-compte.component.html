@@ -1,0 +1,26 @@
+<div class="container mb-5">
+    <form [formGroup]="connectForm" (submit)="submit()">
+        <div class="row">
+            <label> Email</label>
+        </div>
+        <div class="row mb-2">
+            <input type="email" formControlName="identifier"  placeholder="Email">
+        </div>
+        <div class="row">
+            <label> Mot de passe </label>
+        </div>
+        <div class="row mb-2">
+            <input type="password" formControlName="password"  placeholder="Mot de passe">
+        </div>
+        <label *ngIf="connectionerror" class="text-danger">
+            Le nom de compte ou le mot de passe est incorrect
+        </label>
+        <div class="row mb-2">
+            <button type="submit" [disabled]="!connectForm.valid">Se connecter</button>
+        </div>
+    </form>
+    <div class="row mb-2">
+        Mot de passe oublié ? <a routerLink="/changermotdepasse">Réinitialiser</a>
+    </div>
+    
+</div>
