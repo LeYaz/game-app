@@ -6,6 +6,7 @@ import { CompteComponent } from './compte/compte.component';
 import { ForgetPasswordComponent } from './compte/forget-password/forget-password.component';
 import { CreateJeuComponent } from './create-jeu/create-jeu.component';
 import { JeuAlbumComponent } from './jeu-album/jeu-album.component';
+import { QuizListComponent } from './quiz-list/quiz-list.component';
 import { SouscategorieComponent } from './souscategorie/souscategorie.component';
 
 
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'jeuAlbum/:id', component: JeuAlbumComponent},
   { path: 'creerjeu', component: CreateJeuComponent, canActivate: [AuthGuard]},
   { path: 'compte', component: CompteComponent},
-  { path: 'changermotdepasse', component : ForgetPasswordComponent}
+  { path: 'changermotdepasse', component : ForgetPasswordComponent},
+  { path: 'quiz', component: QuizListComponent}
 
 ];
 

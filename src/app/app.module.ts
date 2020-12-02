@@ -21,6 +21,9 @@ import { CreerCompteComponent } from './compte/creer-compte/creer-compte.compone
 import { ConnectionCompteComponent } from './compte/connection-compte/connection-compte.component';
 import { ProfilComponent } from './compte/profil/profil.component';
 import { ForgetPasswordComponent } from './compte/forget-password/forget-password.component';
+import { QuizListComponent } from './quiz-list/quiz-list.component';
+import { QuizComponent } from './quiz-list/quiz/quiz.component';
+import { ResumeQuestionComponent } from './create-jeu/resume-question/resume-question.component';
 
 
 @NgModule({
@@ -41,7 +44,10 @@ import { ForgetPasswordComponent } from './compte/forget-password/forget-passwor
     CreerCompteComponent,
     ConnectionCompteComponent,
     ProfilComponent,
-    ForgetPasswordComponent
+    ForgetPasswordComponent,
+    QuizListComponent,
+    QuizComponent,
+    ResumeQuestionComponent
   ],
   imports: [
     BrowserModule,

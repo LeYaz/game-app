@@ -3,6 +3,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { JeuAlbum } from 'src/app/jeu-album/jeu-album-model';
 import { JeuAlbumService } from 'src/app/jeu-album/jeu-album.service';
+import { Question } from 'src/app/jeu-album/question-model';
+import { Image } from '../image-model';
 
 @Component({
   selector: 'app-create-jeu-quatre-choix',
@@ -11,10 +13,11 @@ import { JeuAlbumService } from 'src/app/jeu-album/jeu-album.service';
 })
 export class CreateJeuQuatreChoixComponent implements OnInit {
   
-  jeuAlbum:JeuAlbum = new JeuAlbum(0, "", ["","","",""], "","");
+  question:Question = new Question(0,"",["","","",""],null, "", null);
   questionForm:FormGroup;
-  @Output() jeuAlbumEvent = new EventEmitter<JeuAlbum>();
-  imgurl="...";
+  @Output() jeuAlbumEvent = new EventEmitter<Question>();
+  @Output() quizEvent = new EventEmitter<boolean>();
+  imgurl="assets/img/default.jpg";
   imagejeu:File = null;
   constructor(private fb:FormBuilder, private http:HttpClient) { }
 
@@ -33,7 +36,7 @@ export class CreateJeuQuatreChoixComponent implements OnInit {
   }
 
   ajouterQuestion(){
-    this.jeuAlbumEvent.emit(this.jeuAlbum);
+    this.jeuAlbumEvent.emit(this.question);
   }
 
   submitQuestion(){
@@ -73,20 +76,44 @@ export class CreateJeuQuatreChoixComponent implements OnInit {
 
   onUploadImage(){
     console.log("click upload")
+    
+  }
+
+   sendQuestion(){
+    this.question.question = this.questionForm.value.question;
+    this.question.option = this.questionForm.value.choix;
+    this.question.valide = this.questionForm.value.valide;
+    // Ajouter l'upload de l'image et bind l'url dans jeuAlbum.image
     const fd = new FormData();
     fd.append('files', this.imagejeu);
     console.log(fd);
-    this.http.post('http://localhost:1337/upload', fd).subscribe(res => {
+    this.http.post<any>('http://localhost:1337/upload', fd).subscribe(res => {
       console.log(res);
+      this.question.image = new Image(res[0].id, res[0].name, res[0].url);
+      this.jeuAlbumEvent.emit(this.question);
+      this.imgurl = "assets/img/default.jpg";
+      this.questionForm.reset();
     })
+    
+    
   }
 
-  sendQuestion(){
-    this.jeuAlbum.question = this.questionForm.value.question;
-    this.jeuAlbum.option = this.questionForm.value.choix;
-    this.jeuAlbum.valide = this.questionForm.value.valide;
-    console.log("jeu envoyé : "+this.jeuAlbum);
+  sendQuiz(){
+    this.question.question = this.questionForm.value.question;
+    this.question.option = this.questionForm.value.choix;
+    this.question.valide = this.questionForm.value.valide;
     // Ajouter l'upload de l'image et bind l'url dans jeuAlbum.image
-    this.jeuAlbumEvent.emit(this.jeuAlbum);
+    const fd = new FormData();
+    fd.append('files', this.imagejeu);
+    console.log(fd);
+    this.http.post<any>('http://localhost:1337/upload', fd).subscribe(res => {
+      console.log(res);
+      this.question.image = new Image(res[0].id, res[0].name, res[0].url);
+      this.jeuAlbumEvent.emit(this.question);
+      this.imgurl = "assets/img/default.jpg";
+      this.questionForm.reset();
+      this.quizEvent.emit(true);
+    })
+    
   }
 }

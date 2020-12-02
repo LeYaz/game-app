@@ -1,0 +1,19 @@
+<div class="container">
+    <h5>{{ question.question}}</h5>
+    <div class="row">
+        <div class="col"[ngClass]="{'green': question.option[0]== question.valide, 'red': question.option[0]!= question.valide}">
+            {{question.option[0]}}
+        </div>
+        <div class="col" [ngClass]="{'green': question.option[1]== question.valide, 'red': question.option[1]!= question.valide}">
+            {{question.option[1]}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col" [ngClass]="{'green': question.option[2]== question.valide, 'red': question.option[2]!= question.valide}">
+            {{question.option[2]}}
+        </div>
+        <div class="col" [ngClass]="{'green': question.option[3]== question.valide, 'red': question.option[3]!= question.valide}">
+            {{question.option[3]}}
+        </div>
+    </div>
+</div>

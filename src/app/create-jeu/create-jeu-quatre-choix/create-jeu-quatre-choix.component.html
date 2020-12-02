@@ -18,6 +18,6 @@
     <option *ngFor="let o of questionForm.value.choix; let i = index" [ngValue]="o">{{o}}</option>
 </select><br>
 <button type="submit" [disabled]="!questionForm.valid" (click)="sendQuestion()">Ajouter une autre question</button>
-<button type="submit" [disabled]="!questionForm.valid">Valider la fin du quizz</button>
+<button type="submit" [disabled]="!questionForm.valid" (click)="sendQuiz()">Valider la fin du quizz</button>
 </form>
 </div>

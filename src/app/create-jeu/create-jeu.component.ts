@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Categorie } from '../categorie/categorie-model';
 import { CategorieService } from '../categorie/categorie.service';
+import { User } from '../compte/user-model';
 import { JeuAlbum } from '../jeu-album/jeu-album-model';
+import { Question } from '../jeu-album/question-model';
+import { QuizService } from '../quiz-list/quiz.service';
+import { Quiz } from '../quiz-list/quiz/quiz-model';
 import { SousCategorie } from '../souscategorie/soucategorie-model';
 import { SouscategorieService } from '../souscategorie/souscategorie.service';
 import { TypeJeu } from '../type-jeu/type-jeu-model';
@@ -15,10 +19,12 @@ import { TypeJeuService } from '../type-jeu/type-jeu.service';
 })
 export class CreateJeuComponent implements OnInit {
   jeuForm:FormGroup;
+  quizForm:FormGroup;
 
-  constructor(private fb:FormBuilder, private categorieService: CategorieService, private sousCategorieService: SouscategorieService, private typeJeuService: TypeJeuService) { }
+  constructor(private fb:FormBuilder, private categorieService: CategorieService, private sousCategorieService: SouscategorieService,
+     private typeJeuService: TypeJeuService, private quizService:QuizService) { }
 
-  listJeuAlbum: JeuAlbum [] = new Array();
+  listQuestion: Question [] = new Array();
   categories: Categorie[] = new Array();
   sousCategories: SousCategorie[] = new Array();
   typeJeu: TypeJeu[] = new Array();
@@ -29,7 +35,7 @@ export class CreateJeuComponent implements OnInit {
   categorieSelected:Categorie=new Categorie(0,"categorie");
   sousCategorieSelected:SousCategorie=new SousCategorie(0,"souscategorie",0);
   typeJeuSelected: TypeJeu=new TypeJeu(0,"type de jeu");
-
+  showquizresume:boolean=false;
   
 
   ngOnInit(): void {
@@ -61,6 +67,10 @@ export class CreateJeuComponent implements OnInit {
       inputcat:[null],
       inputsouscat:[null]
     });
+    this.quizForm = this.fb.group({
+      nom: [null, Validators.required],
+      description: [null, Validators.required]
+    })
   }
 
   submit() {
@@ -151,16 +161,41 @@ export class CreateJeuComponent implements OnInit {
     }
   }
 
-  ajouterJeuAlbum(ja:JeuAlbum){
-    this.listJeuAlbum.push(ja);
+  ajouterQuestion(ja:Question){
+    const question:Question = new Question(ja.id, ja.question, ja.option,  ja.image, ja.valide, null);
+    console.log(JSON.stringify(question));
+    this.listQuestion.push(question);
     console.log('composant parent : '+ ja.valide)
+    
   }
 
-  /**
-   * Ajouter le post du jeu complet : 
-   *  -post des cat et sous cat si nouvelle,
-   *  -post des question
-   *  
-   */
+  submitQuiz(){
+    let user:User = new User(sessionStorage.getItem('username'), sessionStorage.getItem('email'), "");
+    user.id = parseInt( sessionStorage.getItem("id"));
+    let quiz:Quiz = new Quiz(0, this.quizForm.value.nom, this.quizForm.value.description, this.typeJeuSelected, this.sousCategorieSelected, this.sousCategorieSelected, user);
+    this.quizService.addQuiz(quiz).subscribe(res =>{
+      console.log(res);
+      quiz.id= res.id;
+      this.listQuestion.forEach(element => {
+        const question:Question = new Question(0, element.question, element.option, element.image, element.valide, quiz);
+        this.quizService.addQuestion(question).subscribe(rep =>{
+          console.log("post de question : " +rep)
+        }, error =>{
+          console.log(error);
+        });
+      });
+    }, err =>{
+      console.log(err);
+    })
+
+    //Post des question !!!
+  }
+ 
+
+   finaliserQuiz(rep:boolean){
+    this.showquizresume = rep;    
+   }
+
+  
 
 }

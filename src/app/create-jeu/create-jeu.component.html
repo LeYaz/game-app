@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container" *ngIf="!showquizresume">
 
-<form [formGroup]="jeuForm" (ngSubmit)="submit()" *ngIf="!showcreatejeu">
+<form [formGroup]="jeuForm" id="formjeu" (ngSubmit)="submit()" *ngIf="!showcreatejeu">
     <div class="row">
       <div class="col">
         <div class="row d-flex justify-content-center">
@@ -41,10 +41,36 @@
         </div>
     </div>
     </form>
-    <app-create-jeu-resume-cat *ngIf="showcreatejeu" [categorie]="categorieSelected" [sousCategorie]="sousCategorieSelected"[typeJeu]="typeJeuSelected"></app-create-jeu-resume-cat>
+    <div *ngIf="showcreatejeu">
+      <app-create-jeu-resume-cat  [categorie]="categorieSelected" [sousCategorie]="sousCategorieSelected"[typeJeu]="typeJeuSelected"></app-create-jeu-resume-cat>
+      <div class="row">
+        <p>Nombre de question : {{ listQuestion.length }}</p>
+      </div>
+    </div>
     <div class="ligne"></div>
     <p>
-      <app-create-jeu-quatre-choix (jeuAlbumEvent)="ajouterJeuAlbum($event)" *ngIf="showcreatejeu == 1" ></app-create-jeu-quatre-choix>
+      <app-create-jeu-quatre-choix (quizEvent)="finaliserQuiz($event)" (jeuAlbumEvent)="ajouterQuestion($event)" *ngIf="showcreatejeu == 1" ></app-create-jeu-quatre-choix>
       <app-create-jeu-quatre-img *ngIf="showcreatejeu == 2"></app-create-jeu-quatre-img>
     </p>
   </div>
+<div class="container" *ngIf="showquizresume">
+  <app-create-jeu-resume-cat [categorie]="categorieSelected" [sousCategorie]="sousCategorieSelected"[typeJeu]="typeJeuSelected"></app-create-jeu-resume-cat>
+  <div class="row">
+    <p>Nombre de question : {{ listQuestion.length }}</p>
+  </div>
+    <div class="ligne"></div>
+    <div class="container">
+      <form [formGroup]="quizForm" (ngSubmit)="submitQuiz()">
+        <label>Nom du quiz</label>
+        <input type="text" placeholder="Nom de votre quiz" formControlName="nom">
+        <label>Description</label>
+        <textarea placeholder="Entrer une description de votre quiz" formControlName="description"></textarea>
+        <div class="col d-flex justify-content-center mt-5">
+          <button type="submit" [disabled]="!quizForm.valid">Valider</button>
+        </div>
+      </form>
+    </div>
+    <div>
+      <app-resume-question *ngFor="let question of listQuestion" [question]="question"></app-resume-question>
+    </div>
+</div>
