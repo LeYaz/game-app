@@ -1,12 +1,12 @@
-<div class="container quiz col-2" >
+<div class="container quiz" >
     <h3>{{quiz.nom}}</h3>
     <p>{{quiz.description}}</p>
-    <div class="row">
-        <div class="column"> {{quiz.typejeu.nom}}</div>
-        <div class="column"> {{quiz.categorie.nom}}</div>
-        <div class="column"> {{quiz.souscategorie.nom}}</div>
+    <div class="row-cat">
+        <div class="column typejeu"> {{quiz.typejeu.nom}}</div>
+        <div class="column categorie"> {{quiz.categorie.nom}}</div>
+        <div class="column souscat"> {{quiz.souscategorie.nom}}</div>
     </div>
     <div class="row">
-        Quiz réalise par {{quiz.user.username}}
+        <h6>Quiz réalisé par <span>{{quiz.user.username}}</span></h6>
     </div>
 </div>

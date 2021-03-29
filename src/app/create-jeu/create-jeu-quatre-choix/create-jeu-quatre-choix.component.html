@@ -1,23 +1,23 @@
 <div class="container">
-<form [formGroup]="questionForm" (ngSubmit)="submitQuestion()">
+<form class="formulaire" [formGroup]="questionForm" (ngSubmit)="submitQuestion()">
 <label for="question"> Question :</label><br>
-<input type="text" id="question" name="question" formControlName="question"><br>
+<input class="forminput" type="text" id="question" name="question" formControlName="question"><br>
 <label for="image">Image :</label><br>
 <img [src]="imgurl" class="img">
 <input type="file" for="image" name="image" accept="image/png, image/jpeg" formControlName="image" (change)="onFileSelect($event)" ><br>
-<button (click)="onUploadImage()"> Upload </button>
+<!-- <button (click)="onUploadImage()"> Upload </button> -->
 <label for="choix1">Choix 1 :</label><br>
-<input type="text" id="choix1" name="choix1" formControlName="choix1" (change)="addChoix()"><br>
+<input class="forminput" type="text" id="choix1" name="choix1" formControlName="choix1" (change)="addChoix()"><br>
 <label for="choix2">Choix 2 :</label><br>
-<input type="text" id="choix2" name="choix2" formControlName="choix2" (change)="addChoix()"><br>
+<input class="forminput" type="text" id="choix2" name="choix2" formControlName="choix2" (change)="addChoix()"><br>
 <label for="choix3">Choix 3 :</label><br>
-<input type="text" id="choix3" name="choix3" formControlName="choix3" (change)="addChoix()"><br>
+<input class="forminput" type="text" id="choix3" name="choix3" formControlName="choix3" (change)="addChoix()"><br>
 <label for="choix4">Choix 4 :</label><br>
-<input type="text" id="choix4" name="choix4" formControlName="choix4" (change)="addChoix()"><br>
+<input class="forminput" type="text" id="choix4" name="choix4" formControlName="choix4" (change)="addChoix()"><br>
 <select formControlName="valide">
     <option *ngFor="let o of questionForm.value.choix; let i = index" [ngValue]="o">{{o}}</option>
 </select><br>
-<button type="submit" [disabled]="!questionForm.valid" (click)="sendQuestion()">Ajouter une autre question</button>
-<button type="submit" [disabled]="!questionForm.valid" (click)="sendQuiz()">Valider la fin du quizz</button>
+<button class="btnsubmit" type="submit" [disabled]="!questionForm.valid" (click)="sendQuestion()">Ajouter une autre question</button>
+<button class="btnsubmit" type="submit" [disabled]="!questionForm.valid" (click)="sendQuiz()">Valider la fin du quizz</button>
 </form>
 </div>

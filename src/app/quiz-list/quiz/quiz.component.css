@@ -6,4 +6,39 @@ h3{
     color: #1e3799;
     background-color: white;
     border-radius: 10px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.row-cat{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.row-cat .column{
+    padding: 8px;
+    border-radius: 50%;
+    width: 150px;
+}
+
+.typejeu{
+    background-color: tomato;
+}
+
+.categorie{
+    background-color: teal;
+}
+
+.souscat{
+    background-color: violet;
+}
+
+.row h6{
+    width: auto;
+    margin: auto;
+}
+
+.row h6 span{
+    color: royalblue;
 }

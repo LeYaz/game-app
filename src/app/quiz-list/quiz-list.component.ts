@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Categorie } from '../categorie/categorie-model';
 import { User } from '../compte/user-model';
 import { SousCategorie } from '../souscategorie/soucategorie-model';
@@ -13,7 +14,7 @@ import { Quiz } from './quiz/quiz-model';
 })
 export class QuizListComponent implements OnInit {
 
-  constructor(private quizService:QuizService) { }
+  constructor(private quizService:QuizService, private router:Router, private route:ActivatedRoute) { }
 
   quizList: Quiz[] = new Array();
 
@@ -22,7 +23,7 @@ export class QuizListComponent implements OnInit {
 
     this.quizService.getQuiz().subscribe(res =>{
       list =res;
-      console.log(res);
+      // console.log(res);
       list.forEach(e=>{
         const id = e.id;
         const nom = e.nom;
@@ -40,6 +41,10 @@ export class QuizListComponent implements OnInit {
       console.log(err);
     })
 
+  }
+
+  choixQuiz(quiz:Quiz){
+    this.router.navigate(['/jeuAlbum', quiz.id], {relativeTo: this.route})
   }
 
 }

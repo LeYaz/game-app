@@ -22,7 +22,7 @@ export class ResultatComponent implements OnInit {
   }
 
   Menu(){
-    this.router.navigate(['/categorie'], {relativeTo: this.route});
+    this.router.navigate(['/quiz'], {relativeTo: this.route});
   }
 
   Recommencer(){

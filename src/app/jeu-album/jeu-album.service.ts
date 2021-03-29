@@ -13,4 +13,8 @@ export class JeuAlbumService {
   getJeuAlbum(id:number){
     return this.http.get(this.url+'?souscategorie.id='+id);
   }
+
+  getQuizQuestions(id:number){
+    return this.http.get('http://localhost:1337/questions?quiz.id='+id);
+  }
 }

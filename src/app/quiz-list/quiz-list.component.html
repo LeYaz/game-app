@@ -1,4 +1,4 @@
 <div *ngFor="let quiz of quizList"  >
-    <app-quiz  [quiz]="quiz"></app-quiz>
+    <app-quiz class="quiz" (click)="choixQuiz(quiz)" [quiz]="quiz"></app-quiz>
 </div>
 

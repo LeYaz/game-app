@@ -1,22 +1,22 @@
 <div class="container">
     
     <div class="container">
-        <h2 class="text-center mb-5">{{j.question}}</h2>
+        <h2 class="text-center mb-5">{{q.question}}</h2>
         <div class="row mb-5">
             <div class="mx-auto text-center div-img">
-                <img class="img" [ngClass]="{'img-anim' :!showreponse}" src="{{j.image}}">
+                <img class="img" [ngClass]="{'img-anim' :!showreponse}" src="{{q.image.url}}">
             </div>
         </div>
         <div class="container">
             <div class="row w-50 mx-auto">
-                <div *ngFor="let o of j.option; let i = index" class=" mx-auto text-center div-typing-text"> 
-                <button [disabled]="showreponse" [ngClass]="{'btn-vert' : bonnereponse && stateOfButton[i] , 'btn-rouge' : !bonnereponse && stateOfButton[i] }"  (click)="clickReponse(o, j.valide); changeState(i)" class="btn-cat"><p class="typing-text">{{ o }}</p></button>
+                <div *ngFor="let o of q.option; let i = index" class=" mx-auto text-center div-typing-text"> 
+                <button [disabled]="showreponse" [ngClass]="{'btn-vert' : bonnereponse && stateOfButton[i] , 'btn-rouge' : !bonnereponse && stateOfButton[i] }"  (click)="clickReponse(o, q.valide); changeState(i)" class="btn-cat"><p class="typing-text">{{ o }}</p></button>
             </div>
         </div>
             <div class="row w-50 mx-auto">
             <div *ngIf="showreponse" class="mx-auto text-center">
                 <p *ngIf="bonnereponse">✔️ C'est la bonne réponse</p>
-                <p *ngIf="!bonnereponse">❌ C'est une mauvaise réponse, la bonne réponse est : {{ j.valide }}</p>
+                <p *ngIf="!bonnereponse">❌ C'est une mauvaise réponse, la bonne réponse est : {{ q.valide }}</p>
                 <button class="btn-cat btn-next" *ngIf="!finjeu" [disabled]="finjeu" (click)="clickSuivant()">Question suivante ➜</button>
             </div>
         </div>

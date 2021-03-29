@@ -11,8 +11,8 @@ import { SouscategorieComponent } from './souscategorie/souscategorie.component'
 
 
 const routes: Routes = [
-  { path:'categorie', component: CategorieComponent},
-  { path: 'souscategorie/:id', component: SouscategorieComponent},
+  // { path:'categorie', component: CategorieComponent},
+  // { path: 'souscategorie/:id', component: SouscategorieComponent},
   { path: 'jeuAlbum/:id', component: JeuAlbumComponent},
   { path: 'creerjeu', component: CreateJeuComponent, canActivate: [AuthGuard]},
   { path: 'compte', component: CompteComponent},

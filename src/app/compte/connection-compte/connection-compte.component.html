@@ -1,26 +1,25 @@
-<div class="container mb-5">
-    <form [formGroup]="connectForm" (submit)="submit()">
-        <div class="row">
-            <label> Email</label>
-        </div>
+<div class="container mb-5" class="div-formulaire">
+    <form [formGroup]="connectForm" (submit)="submit()" class="formulaire">
+        <h5 class="text-center">Connexion</h5>
         <div class="row mb-2">
-            <input type="email" formControlName="identifier"  placeholder="Email">
+            <input class="forminput" type="email" formControlName="identifier"  placeholder="Email">
         </div>
-        <div class="row">
-            <label> Mot de passe </label>
-        </div>
+        
         <div class="row mb-2">
-            <input type="password" formControlName="password"  placeholder="Mot de passe">
+            <input class="forminput" type="password" formControlName="password"  placeholder="Mot de passe">
         </div>
         <label *ngIf="connectionerror" class="text-danger">
             Le nom de compte ou le mot de passe est incorrect
         </label>
         <div class="row mb-2">
-            <button type="submit" [disabled]="!connectForm.valid">Se connecter</button>
+            <button class="btnsubmit" type="submit" [disabled]="!connectForm.valid">Se connecter</button>
         </div>
     </form>
-    <div class="row mb-2">
-        Mot de passe oublié ? <a routerLink="/changermotdepasse">Réinitialiser</a>
+    <div class="row mb-2 mdpreset">
+        <p>
+            Mot de passe oublié ? <a routerLink="/changermotdepasse">Réinitialiser</a>
+        </p>
+       
     </div>
     
 </div>

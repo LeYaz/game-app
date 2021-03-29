@@ -1,32 +1,24 @@
 <div class="container mb-5">
-    <form [formGroup]="userForm" (submit)="submit()">
-        <div class="row">
-            <label> Email</label>
-        </div>
+    <form [formGroup]="userForm" (submit)="submit()" class="formulaire">
+        <h5 class="text-center">Créer un compte</h5>
         <div class="row mb-2">
-            <input type="email" formControlName="email" placeholder="Email" >
+            <input class="forminput" type="email" formControlName="email" placeholder="Email" >
         </div>
         <div *ngIf="userForm.controls['email'].invalid && (userForm.controls['email'].dirty || userForm.controls['email'].touched)" class="alert">
             <label *ngIf="userForm.controls['email'].errors.required || userForm.controls['email'].hasError('email')" class="text-danger">
-                Entrer une adresse mail valide
+                ⚠️ Entrer une adresse mail valide
             </label>
         </div>
-        <div class="row">
-            <label> Nom d'utilisateur</label>
-        </div>
         <div class="row mb-2">
-            <input type="text" formControlName="username" placeholder="Nom d'utilisateur">
+            <input class="forminput" type="text" formControlName="username" placeholder="Nom d'utilisateur">
         </div>
         <div *ngIf="userForm.controls['username'].invalid && (userForm.controls['username'].dirty || userForm.controls['username'].touched)" class="alert">
             <label *ngIf="userForm.controls['username'].errors.required || userForm.controls['username'].hasError('minlength')" class="text-danger">
-                Entrer un nom d'utilisateur, il doit comprendre au minimum 5 caractères.
+                ⚠️ Entrer un nom d'utilisateur, il doit comprendre au minimum 5 caractères.
             </label>
         </div>
-        <div class="row">
-            <label> Mot de passe </label>
-        </div>
         <div class="row mb-2">
-            <input type="password" formControlName="password" placeholder="Mot de passe">
+            <input class="forminput" type="password" formControlName="password" placeholder="Mot de passe">
         </div>
         <div *ngIf="userForm.controls['password'].invalid && (userForm.controls['password'].dirty || userForm.controls['password'].touched)" class="alert">
             <label
@@ -37,22 +29,19 @@
             ||userForm.controls['password'].hasError('hasSmallCase')
             ||userForm.controls['password'].hasError('minlenght')"
             >
-                Le mot de passe doit comporter au minimum 8 caractères, dont au moins une majuscule et une minuscule et un chiffre. 
+            ⚠️ Le mot de passe doit comporter au minimum 8 caractères, dont au moins une majuscule et une minuscule et un chiffre. 
             </label>
         </div>
-        <div class="row">
-            <label> Confirmer mot de passe </label>
-        </div>
         <div class="row mb-2">
-            <input type="password" formControlName="confirmPassword" placeholder=" Confirmer mot de passe">
+            <input class="forminput" type="password" formControlName="confirmPassword" placeholder=" Confirmer mot de passe">
         </div>
         <div *ngIf="userForm.controls['confirmPassword'].invalid && (userForm.controls['confirmPassword'].dirty || userForm.controls['confirmPassword'].touched)" class="alert">
             <label  class="text-danger">
-                Entrer le même mot de passe que précédement.
+                ⚠️ Entrer le même mot de passe que précédement.
             </label>
         </div>
         <div class="row mb-2">
-            <button type="submit" [disabled]="!userForm.valid">Créer mon compte</button>
+            <button class="btnsubmit" type="submit" [disabled]="!userForm.valid">Créer mon compte</button>
         </div>
     </form>
 </div>

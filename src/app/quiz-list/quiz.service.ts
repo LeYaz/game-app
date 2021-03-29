@@ -17,6 +17,10 @@ export class QuizService {
     return this.http.get(this.url + 'quizzes')  
   }
 
+  getQuizByUser(id:number){
+    return this.http.get(this.url + 'quizzes?users_permissions_user='+id)  
+  }
+
   addQuiz(quiz:Quiz){
     return this.http.post<any>(this.url+'quizzes', {
         nom : quiz.nom,

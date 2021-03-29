@@ -8,7 +8,8 @@
 <div class="container">
     
     <h1>Mes Quizz</h1>
-    <p> nom du quizz</p>
-    <p> description </p>
+    <div *ngFor="let quiz of quizList"  >
+        <app-quiz class="quiz" [quiz]="quiz"></app-quiz>
+    </div>
    
 </div>
