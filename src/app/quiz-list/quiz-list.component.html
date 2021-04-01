@@ -1,4 +1,8 @@
-<div *ngFor="let quiz of quizList"  >
+<div class="container">
+    <label class="mr-5"> Rechercher un quizz</label>
+    <input  [(ngModel)]="searchText" placeholder="Entrer un mot clé" type="search">
+</div>
+<div *ngFor="let quiz of quizList | recherche:searchText;"  >
     <app-quiz class="quiz" (click)="choixQuiz(quiz)" [quiz]="quiz"></app-quiz>
 </div>
 

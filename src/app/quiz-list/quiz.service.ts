@@ -28,7 +28,9 @@ export class QuizService {
         typejeu : quiz.typejeu,
         categorie : quiz.categorie,
         souscategorie: quiz.souscategorie,
-        users_permissions_user : quiz.user,    
+        users_permissions_user : quiz.user, 
+        compteur : quiz.compteur,
+        nbrquestions : quiz.nbrquestions   
       
     }, 
     // {    
@@ -64,5 +66,28 @@ export class QuizService {
   //     })
   //   }
     )
+  }
+
+  updateCompteur(quiz:Quiz){
+    quiz.compteur++;
+    return this.http.put(this.url + 'quizzes/'+ quiz.id, {
+      nom : quiz.nom,
+      Description: quiz.description,
+      typejeu : quiz.typejeu,
+      categorie : quiz.categorie,
+      souscategorie: quiz.souscategorie,
+      users_permissions_user : quiz.user,
+      compteur : quiz.compteur,
+      nbrquestions : quiz.nbrquestions  
+    })
+  }
+
+
+  getLatestQuiz(){
+    return this.http.get(this.url + 'quizzes?_sort=id:DESC&_start=0&_limit=3');
+  }
+
+  getMostPlayedQuiz(){
+    return this.http.get(this.url + 'quizzes?_sort=compteur:DESC&_start=0&_limit=3');
   }
 }

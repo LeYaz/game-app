@@ -43,6 +43,12 @@
         <div class="row mb-2">
             <button class="btnsubmit" type="submit" [disabled]="!userForm.valid">Créer mon compte</button>
         </div>
+        <div class="row mb-2" *ngIf="emailSubmit">
+            <p *ngIf="emailsend"> Un email de confirmation vous a été envoyé,
+                vous pouvez quitter cette page.
+            </p>
+            <p *ngIf="!emailsend">⚠️ Une erreur est survenue veuillez verifié l'adresse email</p>
+        </div>
     </form>
 </div>
 

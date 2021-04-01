@@ -12,8 +12,11 @@ export class Quiz{
     categorie:Categorie;
     souscategorie:SousCategorie;
     user:User;
+    compteur:number;
+    nbrquestions:number;
 
-    constructor(id:number, nom:string, description:string, typejeu:TypeJeu, categorie:Categorie, souscategorie:SousCategorie, user:User){
+    constructor(id:number, nom:string, description:string, typejeu:TypeJeu, categorie:Categorie, souscategorie:SousCategorie, user:User, 
+        compteur:number, nbrquestions:number){
         this.id = id;
         this.nom = nom;
         this.description = description;
@@ -21,5 +24,7 @@ export class Quiz{
         this.categorie = categorie;
         this.souscategorie = souscategorie;
         this.user = user;
+        this.compteur = compteur;
+        this.nbrquestions= nbrquestions;
     }
 }

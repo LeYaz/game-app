@@ -17,7 +17,7 @@ export class QuizListComponent implements OnInit {
   constructor(private quizService:QuizService, private router:Router, private route:ActivatedRoute) { }
 
   quizList: Quiz[] = new Array();
-
+  public searchText : string="";
   ngOnInit(): void {
     let list;
 
@@ -32,8 +32,9 @@ export class QuizListComponent implements OnInit {
         const categorie:Categorie = e.categorie;
         const souscategorie:SousCategorie = e.souscategorie;
         const user:User = e.users_permissions_user;
-        console.log(user);
-        const quiz = new Quiz(id, nom, description, typejeu, categorie, souscategorie, user);
+        const compteur = e.compteur;
+        const nbrquestions = e.nbrquestions;
+        const quiz = new Quiz(id, nom, description, typejeu, categorie, souscategorie, user, compteur, nbrquestions);
         this.quizList.push(quiz);
       })
     },

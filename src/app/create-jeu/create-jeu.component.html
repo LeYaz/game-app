@@ -61,10 +61,13 @@
     <div class="ligne"></div>
     <div class="container">
       <form [formGroup]="quizForm" (ngSubmit)="submitQuiz()">
-        <label>Nom du quiz</label>
-        <input type="text" placeholder="Nom de votre quiz" formControlName="nom">
-        <label>Description</label>
-        <textarea placeholder="Entrer une description de votre quiz" formControlName="description"></textarea>
+        <div class="row d-flex justify-content-around mt-5">
+          <label>Nom du quiz</label>
+          <input type="text" placeholder="Nom de votre quiz" formControlName="nom">
+        </div>
+        <div class="row d-flex justify-content-center mt-5">
+          <textarea class="form-control" placeholder="Entrer une description de votre quiz" formControlName="description"></textarea>
+        </div>
         <div class="col d-flex justify-content-center mt-5">
           <button type="submit" [disabled]="!quizForm.valid">Valider</button>
         </div>

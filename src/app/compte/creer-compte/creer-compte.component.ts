@@ -12,7 +12,8 @@ import { CreerCompteService } from './creer-compte.service';
 export class CreerCompteComponent implements OnInit {
 
   userForm:FormGroup;
-
+  emailSubmit:boolean = false;
+  emailsend:boolean = true;
   constructor(private fb:FormBuilder, private creerCompteService:CreerCompteService) { }
 
   ngOnInit(): void {
@@ -34,15 +35,20 @@ export class CreerCompteComponent implements OnInit {
   }
 
   submit(){
+    this.emailSubmit = true;
     console.log(this.userForm);
     let user:User = new User(this.userForm.value.username, this.userForm.value.email, this.userForm.value.password);
     
     this.creerCompteService.registerUser(user).subscribe(res =>{
       console.log('Register user : ' + JSON.stringify(res));
       const response = res;
-      
+      this.emailsend=true;
       console.log('User profile', response.jwt);
-    
+    }, err=>{
+      console.log(err);
+      this.emailsend =false;
+       this.emailSubmit = true;
+      
     })  
   }
 

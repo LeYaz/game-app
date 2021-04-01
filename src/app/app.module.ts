@@ -24,6 +24,8 @@ import { ForgetPasswordComponent } from './compte/forget-password/forget-passwor
 import { QuizListComponent } from './quiz-list/quiz-list.component';
 import { QuizComponent } from './quiz-list/quiz/quiz.component';
 import { ResumeQuestionComponent } from './create-jeu/resume-question/resume-question.component';
+import { HomeComponent } from './home/home.component';
+import { RecherchePipe } from './pipe/recherche.pipe';
 
 
 @NgModule({
@@ -47,7 +49,9 @@ import { ResumeQuestionComponent } from './create-jeu/resume-question/resume-que
     ForgetPasswordComponent,
     QuizListComponent,
     QuizComponent,
-    ResumeQuestionComponent
+    ResumeQuestionComponent,
+    HomeComponent,
+    RecherchePipe
   ],
   imports: [
     BrowserModule,

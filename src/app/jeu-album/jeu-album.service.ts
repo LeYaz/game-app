@@ -15,6 +15,6 @@ export class JeuAlbumService {
   }
 
   getQuizQuestions(id:number){
-    return this.http.get('http://localhost:1337/questions?quiz.id='+id);
+    return this.http.get( environment.baseUrl +'questions?quiz.id='+id);
   }
 }

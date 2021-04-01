@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Question } from './question-model';
 import { Image } from '../create-jeu/image-model';
 import { Quiz } from '../quiz-list/quiz/quiz-model';
+import { QuizService } from '../quiz-list/quiz.service';
 
 @Component({
   selector: 'app-jeu-album',
@@ -14,7 +15,7 @@ import { Quiz } from '../quiz-list/quiz/quiz-model';
 })
 export class JeuAlbumComponent implements OnInit {
 
-  constructor(private jeuAlbumService: JeuAlbumService,private router:Router, private route:ActivatedRoute) { }
+  constructor(private jeuAlbumService: JeuAlbumService,private router:Router, private route:ActivatedRoute, private quizService: QuizService) { }
   // jeux: JeuAlbum[] = new Array();
   questions: Question[] = new Array();
   showreponse:boolean = false;
@@ -54,9 +55,9 @@ export class JeuAlbumComponent implements OnInit {
          const question = e.question;
          const option = e.option.options;
          const valide = e.valide;
-         const imgurl = "http://localhost:1337"+ e.image.formats.thumbnail.url;
+         const imgurl =  e.image.formats.thumbnail.url;
          const image = new Image(e.image.id, e.image.name, imgurl);
-         const quiz = new Quiz(e.quiz.id, e.quiz.nom, e.quiz.Description, e.quiz.typejeu, e.quiz.categorie, e.quiz.souscategorie, e.quiz.users_permissions_user);
+         const quiz = new Quiz(e.quiz.id, e.quiz.nom, e.quiz.Description, e.quiz.typejeu, e.quiz.categorie, e.quiz.souscategorie, e.quiz.users_permissions_user, e.quiz.compteur, e.quiz.nbrquestions);
          const newquestion = new Question(id, question,option,image, valide, quiz );
         this.questions.push(newquestion);
        });
@@ -89,6 +90,9 @@ clickReponse(rep:string, valide:string){
       this.finjeu = false;
     }else{
       this.finjeu = true;
+      this.quizService.updateCompteur(this.questions[0].quiz).subscribe(res=>{
+        // console.log(res);
+      })
     }
 }
 
@@ -102,6 +106,7 @@ clickSuivant(){
     this.changeQuestion();
   }else{
     this.finjeu = true;
+
   } 
 }
 

@@ -37,8 +37,10 @@ export class ProfilComponent implements OnInit {
         const categorie:Categorie = e.categorie;
         const souscategorie:SousCategorie = e.souscategorie;
         const user:User = e.users_permissions_user;
+        const compteur = e.compteur;
+        const nbrquestions = e.nbrquestions;
         console.log(user);
-        const quiz = new Quiz(id, nom, description, typejeu, categorie, souscategorie, user);
+        const quiz = new Quiz(id, nom, description, typejeu, categorie, souscategorie, user, compteur, nbrquestions);
         this.quizList.push(quiz);
 
       });

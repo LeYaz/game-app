@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SousCategorie } from './soucategorie-model';
 import { SouscategorieService } from './souscategorie.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Categorie } from '../categorie/categorie-model';
 
 @Component({
   selector: 'app-souscategorie',
@@ -23,7 +24,8 @@ export class SouscategorieComponent implements OnInit {
       liste.forEach(e => {
         const id = e.id;
         const nom = e.nom;
-        const souscat = new SousCategorie(id, nom, catid);
+        const cat = new Categorie(e.categorie.id, e.categorie.nom);
+        const souscat = new SousCategorie(id, nom, cat);
         this.souscategories.push(souscat);
       })
     })

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Categorie } from '../categorie/categorie-model';
 import { CategorieService } from '../categorie/categorie.service';
 import { User } from '../compte/user-model';
@@ -22,7 +23,7 @@ export class CreateJeuComponent implements OnInit {
   quizForm:FormGroup;
 
   constructor(private fb:FormBuilder, private categorieService: CategorieService, private sousCategorieService: SouscategorieService,
-     private typeJeuService: TypeJeuService, private quizService:QuizService) { }
+     private typeJeuService: TypeJeuService, private quizService:QuizService, private router:Router, private route:ActivatedRoute) { }
 
   listQuestion: Question [] = new Array();
   categories: Categorie[] = new Array();
@@ -33,7 +34,7 @@ export class CreateJeuComponent implements OnInit {
   showcreatejeu:number=0;
   newscat:string;
   categorieSelected:Categorie=new Categorie(0,"categorie");
-  sousCategorieSelected:SousCategorie=new SousCategorie(0,"souscategorie",0);
+  sousCategorieSelected:SousCategorie=new SousCategorie(0,"souscategorie",null);
   typeJeuSelected: TypeJeu=new TypeJeu(0,"type de jeu");
   showquizresume:boolean=false;
   
@@ -90,9 +91,15 @@ export class CreateJeuComponent implements OnInit {
     }
 
     if(this.jeuForm.value.souscategorie!=0){
-      this.sousCategorieSelected=this.sousCategories[this.jeuForm.value.souscategorie-1];
+      // this.sousCategorieSelected=this.sousCategories[this.jeuForm.value.souscategorie-1];
+      console.log(' sous cat : '+this.actualsouscatid);
+      this.sousCategorieSelected=this.sousCategories.filter(item =>{
+        return item.id == this.actualsouscatid;
+      })[0];
+      
+      console.log(this.sousCategorieSelected);
     }else{
-      this.sousCategorieSelected = new SousCategorie(0,this.jeuForm.value.inputsouscat,this.categorieSelected.id);
+      this.sousCategorieSelected = new SousCategorie(0,this.jeuForm.value.inputsouscat,this.categorieSelected);
       this.sousCategorieService.addSousCagetoire(this.sousCategorieSelected).subscribe(res =>{
         this.sousCategorieSelected.id = res.id;
       })
@@ -118,10 +125,11 @@ export class CreateJeuComponent implements OnInit {
       if(catid!=0){
       this.sousCategorieService.getSousCategoriebyCategorie(catid).subscribe(scat =>{
         list = scat;
+        console.log(list);
         list.forEach(e => {
           const id = e.id;
           const nom = e.nom;
-          const souscat = new SousCategorie(id, nom, catid);
+          const souscat = new SousCategorie(id, nom, this.categorieSelected);
           this.sousCategories.push(souscat);
         })
       })
@@ -152,6 +160,7 @@ export class CreateJeuComponent implements OnInit {
     let tab = e.target.value.split(' ');
     let scatid = tab[1];
     this.actualsouscatid = scatid;
+    console.log(this.actualsouscatid);
     if(this.actualsouscatid == 0 ){
       this.jeuForm.get('inputsouscat').setValidators([Validators.required]);
       this.jeuForm.get('inputsouscat').updateValueAndValidity();
@@ -172,7 +181,7 @@ export class CreateJeuComponent implements OnInit {
   submitQuiz(){
     let user:User = new User(sessionStorage.getItem('username'), sessionStorage.getItem('email'), "");
     user.id = parseInt( sessionStorage.getItem("id"));
-    let quiz:Quiz = new Quiz(0, this.quizForm.value.nom, this.quizForm.value.description, this.typeJeuSelected, this.sousCategorieSelected, this.sousCategorieSelected, user);
+    let quiz:Quiz = new Quiz(0, this.quizForm.value.nom, this.quizForm.value.description, this.typeJeuSelected, this.categorieSelected, this.sousCategorieSelected, user, 0, this.listQuestion.length);
     this.quizService.addQuiz(quiz).subscribe(res =>{
       console.log(res);
       quiz.id= res.id;
@@ -187,7 +196,7 @@ export class CreateJeuComponent implements OnInit {
     }, err =>{
       console.log(err);
     })
-
+    this.router.navigate(['/compte'], {relativeTo: this.route});
     //Post des question !!!
   }
  

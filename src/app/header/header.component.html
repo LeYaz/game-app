@@ -21,6 +21,9 @@
             <li class="nav-item">
               <a class="nav-link" routerLink="/compte">{{username}}</a> 
            </li>
+           <li class="nav-item" *ngIf="connected">
+            <a class="nav-link" (click)="Deconnexion()" routerLink="/">Déconnexion</a> 
+         </li>
           </ul>
         </div>
       </nav>

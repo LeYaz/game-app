@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Connection } from '../connection-model';
+import { DataSharingService } from '../data-sharing.service';
 import { ConnectionCompteService } from './connection-compte.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { ConnectionCompteService } from './connection-compte.service';
 })
 export class ConnectionCompteComponent implements OnInit {
   connectForm:FormGroup;
-  constructor(private fb:FormBuilder, private connectionCompteService:ConnectionCompteService) { }
+  constructor(private fb:FormBuilder, private connectionCompteService:ConnectionCompteService, private dataSharingService:DataSharingService) { }
 
   connectionerror:boolean = false;
   @Output() connected = new EventEmitter<boolean>();
@@ -32,6 +33,7 @@ export class ConnectionCompteComponent implements OnInit {
       sessionStorage.setItem('email', res.user.email);
       sessionStorage.setItem('id', res.user.id);
       this.connected.emit(true);
+      this.dataSharingService.isUserLoggedIn.next(true);
     },
     err => {
       console.log(err);
