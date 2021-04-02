@@ -107,7 +107,7 @@ export class CreateJeuQuatreChoixComponent implements OnInit {
     const fd = new FormData();
     fd.append('files', this.imagejeu);
     console.log(fd);
-    this.http.post<any>( environment.baseUrl + '/upload', fd).subscribe(res => {
+    this.http.post<any>( environment.baseUrl + 'upload', fd).subscribe(res => {
       console.log(res);
       this.question.image = new Image(res[0].id, res[0].name, res[0].url);
       this.jeuAlbumEvent.emit(this.question);
