@@ -2,15 +2,15 @@
     <h3>{{quiz.nom}}</h3>
     <p>{{quiz.description}}</p>
     <div class="row-cat">
-        <div class="column typejeu"> {{quiz.typejeu.nom}}</div>
-        <div class="column categorie"> {{quiz.categorie.nom}}</div>
-        <div class="column souscat"> {{quiz.souscategorie.nom}}</div>
+        <div class="column typejeu">Type de jeu: {{quiz.typejeu.nom}}</div>
+        <div class="column categorie">Catégorie: {{quiz.categorie.nom}}</div>
+        <div class="column souscat">Sous catégorie : {{quiz.souscategorie.nom}}</div>
     </div>
-    <div class="row">
+    <div class="row mt-3">
         <h6>nombre de questions : <span>{{quiz.nbrquestions}}</span></h6>
         <h6>Quiz réalisé : <span>{{quiz.compteur}}</span> fois</h6>
     </div>
-    <div class="row">
+    <div class="row mt-3">
         <h6>Quiz réalisé par <span>{{quiz.user.username}}</span></h6>
     </div>
 </div>

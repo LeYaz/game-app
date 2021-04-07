@@ -1,5 +1,17 @@
 <div class="container">
     <div class="mt-5">
+        <h3 class="text-center"> A Propos</h3>
+        <div class=" row justify-content-center">
+            <p class="col-9 text-center">
+                Bienvenue sur Quiz Champions, un site de quizs où vous pouvez répondre aux différents quizs disponibles. De plus vous pouvez créer vos propres quizs, pour cela il vous suffit de vous créer un compte. 
+            </p>
+            <p class="col-9 text-center">  
+                Il est possible que les quizs mettent du temps à charger car l'api peut se mettre en veille si elle n'est pas sollicitée. 
+            </p>
+        </div>
+        
+    </div>
+    <div class="mt-5">
         <h3 class="text-center"> Les derniers quizs ajoutés</h3>
         <div *ngFor="let quiz of quizRecents"  >
             <app-quiz class="quiz" (click)="choixQuiz(quiz)" [quiz]="quiz"></app-quiz>

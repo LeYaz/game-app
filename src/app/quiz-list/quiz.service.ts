@@ -30,7 +30,8 @@ export class QuizService {
         souscategorie: quiz.souscategorie,
         users_permissions_user : quiz.user, 
         compteur : quiz.compteur,
-        nbrquestions : quiz.nbrquestions   
+        nbrquestions : quiz.nbrquestions,
+        published_at : null   
       
     }, 
     // {    

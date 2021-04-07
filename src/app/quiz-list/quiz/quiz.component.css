@@ -12,6 +12,7 @@ h3{
 
 .quiz:hover{
     cursor: pointer;
+    background-color: rgb(206, 203, 203);
 }
 
 .row-cat{
@@ -22,12 +23,14 @@ h3{
 
 .row-cat .column{
     padding: 8px;
-    border-radius: 50%;
+    border-radius: 10px;
     width: 150px;
+    margin: auto;
 }
 
 .typejeu{
     background-color: tomato;
+    
 }
 
 .categorie{
@@ -35,7 +38,7 @@ h3{
 }
 
 .souscat{
-    background-color: violet;
+    background-color: rgb(223, 236, 100);
 }
 
 .row h6{
